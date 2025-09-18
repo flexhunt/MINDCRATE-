@@ -12,10 +12,10 @@ importers:
         specifier: latest
         version: 2.0.20(zod@3.24.1)
       '@auth/core':
-        specifier: latest
+        specifier: ^0.40.0
         version: 0.40.0(nodemailer@7.0.6)
       '@emotion/is-prop-valid':
-        specifier: latest
+        specifier: ^1.4.0
         version: 1.4.0
       '@hookform/resolvers':
         specifier: latest
@@ -246,7 +246,7 @@ importers:
         specifier: latest
         version: 3.6.7
       zod:
-        specifier: ^3.24.1
+        specifier: ^3.23.8
         version: 3.24.1
     devDependencies:
       '@types/node':

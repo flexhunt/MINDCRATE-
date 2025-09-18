@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@ai-sdk/xai": "latest",
-    "@auth/core": "latest",
-    "@emotion/is-prop-valid": "latest",
+    "@auth/core": "^0.40.0",
+    "@emotion/is-prop-valid": "^1.4.0",
     "@hookform/resolvers": "latest",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
@@ -88,7 +88,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
     "web-push": "latest",
-    "zod": "^3.24.1"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^22",
