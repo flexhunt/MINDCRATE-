@@ -1,0 +1,51 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Daily Challenge",
+          "weight": "Bolder",
+          "size": "Medium",
+          "color": "Accent"
+        },
+        {
+          "type": "TextBlock",
+          "text": "${challengeTitle}",
+          "weight": "Bolder",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "${challengeDescription}",
+          "wrap": true,
+          "size": "Small"
+        },
+        {
+          "type": "FactSet",
+          "facts": [
+            {
+              "title": "Reward:",
+              "value": "${reward} coins"
+            },
+            {
+              "title": "Progress:",
+              "value": "${progress}/${target}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Take Challenge",
+      "url": "/challenges"
+    }
+  ]
+}

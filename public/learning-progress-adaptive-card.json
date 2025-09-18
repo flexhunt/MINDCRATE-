@@ -1,0 +1,73 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "Learning Progress",
+          "weight": "Bolder",
+          "size": "Medium",
+          "color": "Accent"
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Courses Completed",
+                  "size": "Small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${coursesCompleted}",
+                  "weight": "Bolder",
+                  "size": "Large",
+                  "color": "Good"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Current Streak",
+                  "size": "Small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${currentStreak} days",
+                  "weight": "Bolder",
+                  "size": "Large",
+                  "color": "Attention"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "XP: ${totalXP}",
+          "size": "Small",
+          "color": "Accent"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Open Dashboard",
+      "url": "/dashboard"
+    }
+  ]
+}

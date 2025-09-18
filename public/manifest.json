@@ -1,0 +1,218 @@
+{
+  "name": "Mindcrate - AI-Powered Knowledge Platform",
+  "short_name": "Mindcrate",
+  "description": "Transform your mindset with AI-powered growth tools, interactive challenges, and personalized learning experiences",
+  "start_url": "/?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "id": "mindcrate-knowledge-platform-v2",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "categories": ["education", "productivity", "social", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/logo.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Mindcrate Dashboard - Wide View"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mindcrate Mobile Experience"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Home",
+      "description": "Go to your personal dashboard",
+      "url": "/dashboard?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Learn",
+      "short_name": "Courses",
+      "description": "Access courses and learning materials",
+      "url": "/courses?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Chat",
+      "short_name": "Community",
+      "description": "Connect with the community",
+      "url": "/chat?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Challenges",
+      "short_name": "Challenges",
+      "description": "Join daily challenges",
+      "url": "/challenges?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Quiz",
+      "short_name": "Quiz",
+      "description": "Test your knowledge",
+      "url": "/quiz?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/courses?import=true",
+      "accept": {
+        "application/pdf": [".pdf"],
+        "text/markdown": [".md"],
+        "text/plain": [".txt"],
+        "application/json": [".json"]
+      },
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }]
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+mindcrate",
+      "url": "/dashboard?action=%s"
+    },
+    {
+      "protocol": "web+learn",
+      "url": "/courses?course=%s"
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "files",
+          "accept": ["image/*", "application/pdf", "text/*", "video/*"]
+        }
+      ]
+    }
+  },
+  "widgets": [
+    {
+      "name": "learning-progress",
+      "description": "Track your daily learning progress",
+      "tag": "learning-progress",
+      "template": "learning-progress-adaptive-card",
+      "ms_ac_template": "/learning-progress-adaptive-card.json",
+      "data": "/api/widgets/learning-progress",
+      "type": "application/json",
+      "screenshots": [{ "src": "/logo.png", "sizes": "192x192", "label": "Learning Progress Widget" }],
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }],
+      "auth": false,
+      "update": 3600
+    },
+    {
+      "name": "daily-challenge",
+      "description": "View and complete today's challenge",
+      "tag": "daily-challenge",
+      "template": "daily-challenge-adaptive-card",
+      "ms_ac_template": "/daily-challenge-adaptive-card.json",
+      "data": "/api/widgets/daily-challenge",
+      "type": "application/json",
+      "screenshots": [{ "src": "/logo.png", "sizes": "192x192", "label": "Daily Challenge Widget" }],
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }],
+      "auth": false,
+      "update": 86400
+    },
+    {
+      "name": "quick-stats",
+      "description": "Your learning statistics at a glance",
+      "tag": "quick-stats",
+      "template": "quick-stats-adaptive-card",
+      "data": "/api/widgets/quick-stats",
+      "type": "application/json",
+      "screenshots": [{ "src": "/logo.png", "sizes": "192x192", "label": "Quick Stats Widget" }],
+      "icons": [{ "src": "/logo.png", "sizes": "192x192" }],
+      "auth": true,
+      "update": 1800
+    }
+  ]
+}

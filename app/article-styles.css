@@ -1,0 +1,45 @@
+/* Add this to your globals.css or create a new CSS file and import it */
+.article-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  display: block;
+}
+
+.article-content table th,
+.article-content table td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.article-content table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+}
+
+.article-content table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.dark .article-content table th,
+.dark .article-content table td {
+  border-color: #334155;
+}
+
+.dark .article-content table th {
+  background-color: #1e293b;
+}
+
+.dark .article-content table tr:nth-child(even) {
+  background-color: #1e293b;
+}
+
+/* Make tables responsive */
+@media (max-width: 640px) {
+  .article-content table {
+    display: block;
+    overflow-x: auto;
+  }
+}

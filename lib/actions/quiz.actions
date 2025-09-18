@@ -1,0 +1,189 @@
+"use server"
+
+import { cookies } from "next/headers"
+import { createClient } from "@/lib/supabase/server"
+import type { UserAnswer, QuizResult } from "@/lib/quiz/quiz-types"
+
+/**
+ * Submit quiz answers and get results
+ */
+export async function submitQuizAnswers(
+  userId: string, 
+  levelId: string, 
+  answers: UserAnswer[]
+): Promise<QuizResult> {
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+
+  // Get the level with questions
+  const { data: level, error: levelError } = await supabase
+    .from("quiz_levels")
+    .select("*")
+    .eq("id", levelId)
+    .single()
+
+  if (levelError) {
+    console.error("Error fetching quiz level:", levelError)
+    throw new Error("Quiz level not found")
+  }
+
+  // Get the questions
+  const { data: questions, error: questionsError } = await supabase
+    .from("quiz_questions")
+    .select("*")
+    .eq("level_id", levelId)
+
+  if (questionsError) {
+    console.error("Error fetching quiz questions:", questionsError)
+    throw new Error("Failed to load quiz questions")
+  }
+
+  if (!questions || questions.length === 0) {
+    throw new Error("No questions found for this level")
+  }
+
+  // Check if all questions were answered
+  if (answers.length !== questions.length) {
+    throw new Error("All questions must be answered")
+  }
+
+  // Calculate correct answers
+  const results = answers.map((answer) => {
+    const question = questions.find((q) => q.id === answer.questionId)
+
+    if (!question) {
+      throw new Error(`Question ${answer.questionId} not found`)
+    }
+
+    return {
+      questionId: answer.questionId,
+      correct: answer.selectedOption === question.correct_option,
+      selectedOption: answer.selectedOption,
+      correctOption: question.correct_option,
+    }
+  })
+
+  const correctAnswers = results.filter((r) => r.correct).length
+  const score = Math.round((correctAnswers / questions.length) * 100)
+  const passed = score >= 70
+
+  // Calculate coins earned
+  const BASE_REWARD_PER_LEVEL = 20
+  const PERFECT_SCORE_BONUS = 10
+  
+  let coinsEarned = 0
+  let limitMessage = null
+
+  if (passed) {
+    // Check if user has already completed this level before
+    // Use quiz_attempts table instead of quiz_completions since it might not exist yet
+    try {
+      const { data: previousAttempts, error: attemptsError } = await supabase
+        .from("quiz_attempts")
+        .select("id, passed, coins_earned")
+        .eq("user_id", userId)
+        .eq("level_id", levelId)
+        .eq("passed", true)
+        .order("created_at", { ascending: false })
+      
+      if (attemptsError) {
+        console.error("Error checking previous attempts:", attemptsError)
+        // Continue with coins since we couldn't verify previous attempts
+        coinsEarned = BASE_REWARD_PER_LEVEL
+        if (score === 100) {
+          coinsEarned += PERFECT_SCORE_BONUS
+        }
+      } else if (previousAttempts && previousAttempts.length > 0) {
+        // User has completed this level before
+        // Check if they've earned coins for it before
+        const hasEarnedCoins = previousAttempts.some(attempt => attempt.coins_earned > 0)
+        
+        if (hasEarnedCoins) {
+          limitMessage = "You've already earned coins for this level. Coins are only awarded for first-time completions."
+          coinsEarned = 0
+        } else {
+          // They passed before but didn't earn coins (maybe due to daily limit)
+          // Let them earn coins this time
+          coinsEarned = BASE_REWARD_PER_LEVEL
+          if (score === 100) {
+            coinsEarned += PERFECT_SCORE_BONUS
+          }
+        }
+      } else {
+        // First time passing this level
+        coinsEarned = BASE_REWARD_PER_LEVEL
+        if (score === 100) {
+          coinsEarned += PERFECT_SCORE_BONUS
+        }
+      }
+    } catch (error) {
+      console.error("Error checking previous attempts:", error)
+      // Continue with coins since we couldn't verify previous attempts
+      coinsEarned = BASE_REWARD_PER_LEVEL
+      if (score === 100) {
+        coinsEarned += PERFECT_SCORE_BONUS
+      }
+    }
+
+    // If user is eligible for coins, check daily limit
+    if (coinsEarned > 0) {
+      try {
+        // Get current daily earnings
+        const { data: dailyEarnings, error: dailyError } = await supabase
+          .from("daily_quiz_earnings")
+          .select("coins_earned")
+          .eq("user_id", userId)
+          .eq("date", new Date().toISOString().split('T')[0])
+          .maybeSingle()
+        
+        if (dailyError) {
+          console.error("Error checking daily earnings:", dailyError)
+        } else {
+          const currentEarnings = dailyEarnings?.coins_earned || 0
+          const dailyLimit = 100
+          const remaining = dailyLimit - currentEarnings
+          
+          if (currentEarnings + coinsEarned > dailyLimit) {
+            if (remaining > 0) {
+              // Partial award
+              coinsEarned = remaining
+              limitMessage = `You've reached your daily quiz coin limit. Only ${coinsEarned} coins awarded. Try again tomorrow!`
+            } else {
+              // No coins awarded
+              coinsEarned = 0
+              limitMessage = `You've reached your daily limit of ${dailyLimit} coins from quizzes. Try again tomorrow!`
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error in daily coin limit check:", error)
+      }
+    }
+  }
+
+  // Record the attempt first
+  try {
+    const { error: attemptError } = await supabase.from("quiz_attempts").insert({
+      user_id: userId,
+      level_id: levelId,
+      score,
+      passed,
+      coins_earned: coinsEarned,
+    })
+
+    if (attemptError) {
+      console.error("Error recording quiz attempt:", attemptError)
+    }
+  } catch (error) {
+    console.error("Exception recording quiz attempt:", error)
+  }
+
+  return {
+    levelId,
+    score,
+    passed,
+    coinsEarned,
+    limitMessage,
+    answers: results,
+  }
+}
