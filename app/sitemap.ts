@@ -1,59 +1,26 @@
-import type { MetadataRoute } from "next"
+import { MetadataRoute } from 'next'
+import { turso } from "@/lib/turso"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mindcrate.vercel.app"
+  // Fetch all articles
+  const { rows } = await turso.execute(
+    "SELECT slug, created_at FROM articles ORDER BY created_at DESC"
+  );
 
-  // Static pages only - articles have their own sitemap
-  const staticPages = [
+  const articles = rows.map((article: any) => ({
+    url: `https://mindcrate.vercel.app/${article.slug}`,
+    lastModified: new Date(article.created_at),
+    changeFrequency: 'daily' as const,
+    priority: 0.8,
+  }))
+
+  return [
     {
-      url: baseUrl,
+      url: 'https://mindcrate.vercel.app',
       lastModified: new Date(),
-      changeFrequency: "daily" as const,
+      changeFrequency: 'always',
       priority: 1,
     },
-    {
-      url: `${baseUrl}/articles`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/courses`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/quiz`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/challenges`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/dashboard`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/chat`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/shop`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    },
+    ...articles,
   ]
-
-  return staticPages
 }
