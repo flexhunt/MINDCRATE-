@@ -2,6 +2,7 @@ import { getTurso } from "@/lib/turso"
 import { notFound } from "next/navigation"
 import MarkdownRenderer from "@/components/markdown-renderer"
 import Link from "next/link"
+import { EmojiFeaturePills, InlineEmoji } from "@/components/emoji-text"
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0 
@@ -209,7 +210,12 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                                 <div className="text-[10px] font-bold tracking-widest uppercase text-emerald-400/80 mb-1">{cta.badge}</div>
                                 <div className="text-sm font-bold text-white mb-1 group-hover:text-emerald-300 transition-colors">{cta.title}</div>
                                 <div className="text-xs text-zinc-500 leading-relaxed">{cta.desc}</div>
-                                <div className="mt-3 text-[10px] text-zinc-600 font-mono tracking-wide">{cta.feature}</div>
+                                <div className="mt-3">
+                                    <EmojiFeaturePills 
+                                        items={cta.feature.split("·").map(s => s.trim())} 
+                                        className="!justify-start gap-1.5" 
+                                    />
+                                </div>
                             </div>
                             <svg className="w-4 h-4 text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -250,11 +256,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                             </p>
 
                             {/* Feature pills */}
-                            <div className="flex flex-wrap items-center justify-center gap-2 text-[10px] font-semibold text-zinc-600 pt-1">
-                                {["🤖 AI Coach", "🧊 Freeze Days", "😮‍💨 Crisis Mode", "📖 Reading Tracker", "💬 DMs", "🏴‍☠️ Squad Raids"].map(f => (
-                                    <span key={f} className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.05]">{f}</span>
-                                ))}
-                            </div>
+                            <EmojiFeaturePills 
+                                items={["🤖 AI Coach", "🧊 Freeze Days", "😮‍💨 Crisis Mode", "📖 Reading Tracker", "💬 DMs", "🏴‍☠️ Squad Raids"]} 
+                                className="pt-1" 
+                            />
 
                             {/* Social proof */}
                             <div className="flex items-center justify-center gap-6 text-zinc-600 text-xs font-medium pt-2">

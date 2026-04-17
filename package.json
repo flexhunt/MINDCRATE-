@@ -11,6 +11,7 @@
   "dependencies": {
     "@ai-sdk/xai": "2.0.20",
     "@auth/core": "latest",
+    "@ayuuxh/emoji-kit": "^1.0.10",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "latest",
     "@libsql/client": "^0.17.2",
