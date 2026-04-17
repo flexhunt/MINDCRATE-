@@ -44,6 +44,27 @@ const INLINE_CTAS = [
         title: "Stop planning to study. Start tracking the actual hours.",
         desc: "Built-in focus timer. Habit streaks for study sessions. Real data, not vibes.",
         feature: "⏱️ Focus Timer · 📚 Session Tracking · 🏆 Daily Streaks"
+    },
+    {
+        keywords: ["kids", "children", "child", "toddler", "parenting", "bedtime"],
+        badge: "Build family routines",
+        title: "Kids don't follow routines. They follow consistency.",
+        desc: "Track your own habits first. When you're consistent, they will be too. Use Trider to build a routine that actually sticks — for you.",
+        feature: "⏰ Custom Reminders · ✅ Daily Checklist · 🔥 Streak Motivation"
+    },
+    {
+        keywords: ["skin", "skincare", "face", "glow", "moistur", "sunscreen", "beauty"],
+        badge: "Skincare habit tracker",
+        title: "A perfect routine is useless if you skip it half the time.",
+        desc: "Trider tracks your skincare routine like any other habit. Morning. Night. No more forgetting. No more 'I'll start Monday'.",
+        feature: "🌙 Morning + Night Habits · ✅ Streak Tracking · 📸 Visual Progress"
+    },
+    {
+        keywords: ["expense", "budget", "money", "saving", "finance", "spend"],
+        badge: "Build better money habits",
+        title: "Tracking expenses is a habit. Treat it like one.",
+        desc: "Set a daily 'check your spending' habit in Trider. 2 minutes a day. That's all it takes to stop bleeding money without noticing.",
+        feature: "📅 Daily Check-in Habit · ⏰ Reminder System · 🔥 Consistency Streaks"
     }
 ]
 
