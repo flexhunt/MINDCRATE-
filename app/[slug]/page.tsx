@@ -1,7 +1,6 @@
 import { getTurso } from "@/lib/turso"
 import { notFound } from "next/navigation"
 import MarkdownRenderer from "@/components/markdown-renderer"
-import { ArrowLeft, Download, Crown } from "lucide-react"
 import Link from "next/link"
 
 export const dynamic = 'force-dynamic'
@@ -58,53 +57,93 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     const article = rows[0];
 
     return (
-        <main className="min-h-screen bg-black text-white selection:bg-cyan-500/30">
-            {/* Header bar */}
-            <div className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10 p-4">
-                <div className="max-w-4xl mx-auto flex items-center justify-between">
-                    <Link href="/" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors">
-                        <ArrowLeft className="w-5 h-5" />
-                        <span className="font-semibold text-sm tracking-widest uppercase">Back to Library</span>
+        <main className="min-h-screen bg-black text-white">
+            {/* ── Floating Top Bar ── */}
+            <nav className="sticky top-0 z-50 backdrop-blur-2xl bg-black/60 border-b border-white/[0.06]">
+                <div className="max-w-3xl mx-auto flex items-center justify-between px-5 py-3">
+                    <Link 
+                        href="/" 
+                        className="group flex items-center gap-2 text-zinc-500 hover:text-white transition-colors duration-300"
+                    >
+                        <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        <span className="text-sm font-medium">Library</span>
                     </Link>
-                    <a href="https://play.google.com/store/apps/details?id=dev.trider.in" target="_blank" className="bg-cyan-500 text-black px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-cyan-400 transition-colors">
-                        Get App
+                    <a 
+                        href="https://play.google.com/store/apps/details?id=dev.trider.app" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm font-semibold text-black bg-white px-4 py-1.5 rounded-full hover:bg-zinc-200 transition-colors duration-200"
+                    >
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302c.312.234.5.611.5 1.007a1.228 1.228 0 0 1-.5 1.007l-2.302 2.302-2.596-2.596 2.596-3.022zM5.864 2.658L16.8 9.091l-2.302 2.302-8.634-8.735z"/>
+                        </svg>
+                        Download Trider
                     </a>
                 </div>
-            </div>
+            </nav>
 
-            <article className="max-w-4xl mx-auto p-6 md:p-12 lg:p-24">
-                {/* Article content */}
-                <div className="prose prose-invert prose-cyan max-w-none prose-lg md:prose-xl">
+            {/* ── Article Body ── */}
+            <article className="max-w-3xl mx-auto px-5 py-12 md:py-20">
+                <div className="prose prose-invert max-w-none">
                     <MarkdownRenderer content={article.content_markdown as string} />
                 </div>
                 
-                {/* The Trider Funnel CTA */}
-                <div className="mt-24 mb-12 p-8 md:p-12 rounded-[2rem] bg-gradient-to-br from-[#0f1115] to-[#050608] border border-white/10 shadow-2xl relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-cyan-500/5 group-hover:bg-cyan-500/10 transition-colors duration-500" />
+                {/* ── Trider CTA Block ── */}
+                <section className="mt-20 mb-8 relative">
+                    {/* Glow effect */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-cyan-500/20 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     
-                    <div className="relative z-10 flex flex-col items-center text-center space-y-6">
-                        <div className="w-16 h-16 rounded-2xl bg-black border border-white/10 flex items-center justify-center mb-2 shadow-[0_0_30px_-5px_rgba(0,229,255,0.3)]">
-                            <Crown className="w-8 h-8 text-cyan-400" />
-                        </div>
-                        <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-white">
-                            Stop Reading. <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Start Tracking.</span>
-                        </h3>
-                        <p className="text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed">
-                            Generic advice won't fix executive dysfunction. Trider is a habit tracker built for people who hate structure. Use the "Freeze Day" feature to protect streaks when paralysis hits.
-                        </p>
+                    <div className="relative p-8 md:p-12 rounded-2xl bg-[#0a0a0a] border border-white/[0.08] overflow-hidden">
+                        {/* Subtle grid pattern */}
+                        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
                         
-                        <div className="pt-6">
-                            <a 
-                                href="https://play.google.com/store/apps/details?id=dev.trider.in" 
-                                target="_blank"
-                                className="inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-full text-lg font-bold hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_-10px_rgba(255,255,255,0.5)]"
-                            >
-                                <Download className="w-6 h-6" />
-                                Download on Android
-                            </a>
+                        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8">
+                            {/* Left: Text */}
+                            <div className="flex-1 space-y-4">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-wider uppercase">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                                    Free on Android
+                                </div>
+                                <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white leading-snug">
+                                    Done reading?<br />
+                                    <span className="text-zinc-500">Now go build the habit.</span>
+                                </h3>
+                                <p className="text-sm text-zinc-500 leading-relaxed max-w-md">
+                                    Trider tracks streaks, has a built-in focus timer, and lets you freeze days when life hits. No premium paywall for core features.
+                                </p>
+                            </div>
+                            
+                            {/* Right: Button */}
+                            <div className="shrink-0">
+                                <a 
+                                    href="https://play.google.com/store/apps/details?id=dev.trider.app" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center gap-3 bg-white text-black pl-5 pr-7 py-4 rounded-2xl font-bold text-base hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 shadow-[0_4px_24px_-4px_rgba(255,255,255,0.15)]"
+                                >
+                                    <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-black/10 group-hover:bg-black/20 transition-colors">
+                                        <svg className="w-5 h-5 text-black" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302c.312.234.5.611.5 1.007a1.228 1.228 0 0 1-.5 1.007l-2.302 2.302-2.596-2.596 2.596-3.022zM5.864 2.658L16.8 9.091l-2.302 2.302-8.634-8.735z"/>
+                                        </svg>
+                                    </span>
+                                    <span className="flex flex-col items-start leading-tight">
+                                        <span className="text-[10px] font-medium text-black/50 uppercase tracking-wider">Get it on</span>
+                                        <span className="text-base font-bold -mt-0.5">Google Play</span>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+
+                {/* ── Footer ── */}
+                <footer className="mt-16 pt-8 border-t border-white/[0.06] text-center">
+                    <p className="text-xs text-zinc-600">
+                        © {new Date().getFullYear()} Mindcrate · Guides for ADHD brains that actually work
+                    </p>
+                </footer>
             </article>
         </main>
     )

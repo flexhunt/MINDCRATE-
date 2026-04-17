@@ -2,230 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
+
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --border: 0 0% 12%;
+    --ring: 192 95% 50%;
+    --radius: 0.75rem;
+  }
+
   body {
-    @apply bg-background text-foreground;
-    /* Fix black block by ensuring proper height and no extra spacing */
+    @apply bg-black text-white antialiased;
     min-height: 100vh;
-    height: 100%;
     margin: 0;
     padding: 0;
   }
 }
 
-/* Color Themes */
-[data-color-theme="blue"] {
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
+/* ── Article Prose Overrides ── */
+.prose {
+  --tw-prose-body: #d4d4d8;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-lead: #a1a1aa;
+  --tw-prose-links: #22d3ee;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-counters: #71717a;
+  --tw-prose-bullets: #52525b;
+  --tw-prose-hr: rgba(255, 255, 255, 0.08);
+  --tw-prose-quotes: #e4e4e7;
+  --tw-prose-quote-borders: rgba(34, 211, 238, 0.3);
+  --tw-prose-code: #22d3ee;
+  --tw-prose-pre-code: #d4d4d8;
+  --tw-prose-pre-bg: rgba(255, 255, 255, 0.04);
 }
 
-[data-color-theme="green"] {
-  --primary: 142.1 76.2% 36.3%;
-  --primary-foreground: 355.7 100% 97.3%;
+.prose h1 { @apply text-3xl md:text-5xl font-black tracking-tight leading-tight mb-6; }
+.prose h2 { @apply text-2xl md:text-3xl font-bold tracking-tight mt-12 mb-4 text-white; }
+.prose h3 { @apply text-xl md:text-2xl font-semibold mt-8 mb-3 text-zinc-100; }
+.prose p { @apply text-base md:text-lg leading-relaxed text-zinc-300 mb-5; }
+.prose a { @apply text-cyan-400 underline decoration-cyan-400/30 underline-offset-4 hover:decoration-cyan-400 transition-all; }
+.prose strong { @apply text-white font-semibold; }
+.prose blockquote { @apply border-l-2 border-cyan-500/40 pl-5 italic text-zinc-400 my-6; }
+.prose ul { @apply space-y-2 my-5; }
+.prose li { @apply text-zinc-300; }
+.prose li::marker { @apply text-cyan-500/60; }
+.prose hr { @apply border-white/[0.06] my-10; }
+.prose code { @apply text-cyan-300 bg-white/[0.06] px-1.5 py-0.5 rounded-md text-sm font-mono; }
+.prose pre { @apply bg-white/[0.03] border border-white/[0.06] rounded-xl p-5 my-6 overflow-x-auto; }
+.prose img { @apply rounded-2xl my-8; }
+
+/* ── SVG in articles ── */
+.prose svg {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem auto;
+  display: block;
+  border-radius: 1rem;
 }
 
-[data-color-theme="purple"] {
-  --primary: 262.1 83.3% 57.8%;
-  --primary-foreground: 210 40% 98%;
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
-[data-color-theme="red"] {
-  --primary: 346.8 77.2% 49.8%;
-  --primary-foreground: 355.7 100% 97.3%;
-}
-
-/* Dark mode color themes */
-.dark[data-color-theme="blue"] {
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 84% 4.9%;
-}
-
-.dark[data-color-theme="green"] {
-  --primary: 142.1 70.6% 45.3%;
-  --primary-foreground: 144.9 80.4% 10%;
-}
-
-.dark[data-color-theme="purple"] {
-  --primary: 263.4 70% 50.4%;
-  --primary-foreground: 210 40% 98%;
-}
-
-.dark[data-color-theme="red"] {
-  --primary: 346.8 77.2% 49.8%;
-  --primary-foreground: 355.7 100% 97.3%;
-}
-
-/* Telegram Chat Background */
-.telegram-chat-bg {
-  /* Light mode - subtle pattern like Telegram */
-  background-color: #f5f5f5;
-  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0);
-  background-size: 20px 20px;
-  background-attachment: fixed;
-}
-
-.dark .telegram-chat-bg {
-  /* Dark mode - darker pattern */
-  background-color: #1a1a1a;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-  background-size: 20px 20px;
-  background-attachment: fixed;
-}
-
-/* Alternative pattern for mobile - more subtle */
+/* ── Mobile fixes ── */
 @media (max-width: 768px) {
-  .telegram-chat-bg {
-    background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
-    background-size: 15px 15px;
-  }
-
-  .dark .telegram-chat-bg {
-    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
-    background-size: 15px 15px;
-  }
-
-  /* Prevent horizontal scrolling on mobile */
-  * {
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* Fix container overflow */
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    max-width: 100vw;
-  }
-}
-
-/* Improved mobile bottom navigation sizing */
-@media (max-width: 768px) {
-  .mobile-bottom-nav {
-    height: 60px; /* Reduced from default larger size */
-    padding: 0.5rem 0; /* Smaller padding */
-  }
-
-  .mobile-bottom-nav .nav-item {
-    padding: 0.25rem; /* Smaller item padding */
-    min-height: 44px; /* Ensure touch target size */
-  }
-
-  .mobile-bottom-nav .nav-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .mobile-bottom-nav .nav-text {
-    font-size: 0.75rem; /* Smaller text */
-    line-height: 1;
-  }
-}
-
-/* Enhanced message bubbles to stand out on patterned background */
-.message-bubble {
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.dark .message-bubble {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* Remove extra bottom spacing that could cause black blocks */
-#__next,
-[data-nextjs-scroll-focus-boundary] {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Ensure main content takes full height without extra space */
-main {
-  flex: 1;
-  min-height: 0;
+  .prose h1 { @apply text-2xl; }
+  .prose h2 { @apply text-xl; }
+  .prose p { @apply text-base; }
 }
