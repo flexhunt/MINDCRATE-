@@ -65,6 +65,13 @@ const INLINE_CTAS = [
         title: "Tracking expenses is a habit. Treat it like one.",
         desc: "Set a 2-minute daily 'check your spending' habit in Trider. After 7 days straight, you'll actually know where your money goes.",
         feature: "📅 Daily Finance Habit · ⏰ Smart Reminders · 🔥 Streaks"
+    },
+    {
+        keywords: ["student", "students", "class", "semester", "campus", "university", "college friend", "batchmate", "hostel", "peer"],
+        badge: "🔜 Coming Soon — School Communities",
+        title: "Your school. Your squad. Your habits.",
+        desc: "Trider is building school & college communities — join your batch, compete on habit leaderboards, DM classmates, and run study challenges together. Be the first from your college to join.",
+        feature: "🏫 School Groups · 🏆 Batch Leaderboards · 💬 DMs + Challenges"
     }
 ]
 
@@ -239,8 +246,15 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                             </h3>
                             
                             <p className="text-sm text-zinc-500 max-w-md mx-auto leading-relaxed">
-                                Streak tracking. Focus timer. Mood journal. Freeze days for when life hits. Built by someone with ADHD, for people with ADHD.
+                                Streak tracking. Pomodoro timer habits. AI Habit Coach. Mood journal. Freeze days. DMs. Squad challenges. Built by someone who needed it.
                             </p>
+
+                            {/* Feature pills */}
+                            <div className="flex flex-wrap items-center justify-center gap-2 text-[10px] font-semibold text-zinc-600 pt-1">
+                                {["🤖 AI Coach", "🧊 Freeze Days", "😮‍💨 Crisis Mode", "📖 Reading Tracker", "💬 DMs", "🏴‍☠️ Squad Raids"].map(f => (
+                                    <span key={f} className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.05]">{f}</span>
+                                ))}
+                            </div>
 
                             {/* Social proof */}
                             <div className="flex items-center justify-center gap-6 text-zinc-600 text-xs font-medium pt-2">
