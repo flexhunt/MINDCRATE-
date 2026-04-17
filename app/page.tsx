@@ -1,12 +1,19 @@
-export const revalidate = 0; // Disable static caching for now
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 import { turso } from "@/lib/turso"
 import Link from "next/link"
 
 export default async function Home() {
-    const { rows } = await turso.execute(
-        "SELECT slug, title, description, created_at FROM articles ORDER BY created_at DESC LIMIT 100"
-    );
+    let rows: any[] = [];
+    try {
+        const result = await turso.execute(
+            "SELECT slug, title, ai_summary, created_at FROM articles ORDER BY created_at DESC LIMIT 100"
+        );
+        rows = result.rows || [];
+    } catch (e) {
+        console.error("Database connection failed:", e);
+    }
 
     return (
         <main className="min-h-screen bg-black text-white p-6 md:p-12 lg:p-24 selection:bg-cyan-500/30">
@@ -31,17 +38,17 @@ export default async function Home() {
                                 {row.title}
                             </h2>
                             <p className="text-zinc-400 leading-relaxed max-w-3xl">
-                                {row.description}
+                                {row.ai_summary}
                             </p>
                             <div className="mt-4 text-xs font-semibold tracking-wider text-zinc-600 uppercase">
-                                {new Date(row.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                                {row.created_at ? new Date(row.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : ""}
                             </div>
                         </Link>
                     ))}
                     
                     {rows.length === 0 && (
                         <div className="text-zinc-500 italic p-12 text-center border border-dashed border-white/10 rounded-2xl">
-                            Loading fresh guides...
+                            No guides found. Generate some in Turso!
                         </div>
                     )}
                 </div>

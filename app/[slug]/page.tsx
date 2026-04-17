@@ -4,11 +4,12 @@ import MarkdownRenderer from "@/components/markdown-renderer"
 import { ArrowLeft, Download, Crown } from "lucide-react"
 import Link from "next/link"
 
-export const revalidate = 0; // Disable static caching for now
+export const dynamic = 'force-dynamic'
+export const revalidate = 0 
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
     const { rows } = await turso.execute({
-        sql: "SELECT title, description FROM articles WHERE slug = ?",
+        sql: "SELECT title, ai_summary FROM articles WHERE slug = ?",
         args: [params.slug]
     });
 
@@ -16,15 +17,21 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
     return {
         title: rows[0].title + " | Mindcrate",
-        description: rows[0].description,
+        description: rows[0].ai_summary,
     }
 }
 
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
-    const { rows } = await turso.execute({
-        sql: "SELECT * FROM articles WHERE slug = ?",
-        args: [params.slug]
-    });
+    let rows: any[] = [];
+    try {
+        const result = await turso.execute({
+            sql: "SELECT * FROM articles WHERE slug = ?",
+            args: [params.slug]
+        });
+        rows = result.rows || [];
+    } catch(e) {
+        console.error(e)
+    }
 
     if (!rows || rows.length === 0) {
         notFound();
