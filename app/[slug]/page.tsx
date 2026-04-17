@@ -86,7 +86,24 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
             {/* ── Article Body ── */}
             <article className="max-w-3xl mx-auto px-5 py-12 md:py-20">
-                <div className="prose prose-invert max-w-none">
+                {/* ── Dynamic Top Header (SEO Best Practice: 1 H1 per page) ── */}
+                <header className="mb-10 lg:mb-14">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
+                        {article.title}
+                    </h1>
+                    <div className="flex items-center gap-3 text-zinc-500 text-sm font-medium">
+                        <span className="flex items-center gap-1.5">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            {article.created_at ? new Date(article.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Recently updated"}
+                        </span>
+                        <span>•</span>
+                        <span>by {article.author_id || "Trider Team"}</span>
+                    </div>
+                </header>
+
+                <div className="prose prose-invert max-w-none prose-h1:hidden prose-h2:text-3xl prose-h2:mt-12 prose-a:text-cyan-400">
                     <MarkdownRenderer content={article.content_markdown as string} />
                 </div>
                 
