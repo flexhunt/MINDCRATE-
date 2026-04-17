@@ -1,13 +1,13 @@
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-import { turso } from "@/lib/turso"
+import { getTurso } from "@/lib/turso"
 import Link from "next/link"
 
 export default async function Home() {
     let rows: any[] = [];
     try {
-        const result = await turso.execute(
+        const result = await getTurso().execute(
             "SELECT slug, title, ai_summary, created_at FROM articles ORDER BY created_at DESC LIMIT 100"
         );
         rows = result.rows || [];

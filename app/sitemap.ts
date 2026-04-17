@@ -2,12 +2,12 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 import { MetadataRoute } from 'next'
-import { turso } from "@/lib/turso"
+import { getTurso } from "@/lib/turso"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     // Fetch all articles
-    const { rows } = await turso.execute(
+    const { rows } = await getTurso().execute(
       "SELECT slug, created_at FROM articles ORDER BY created_at DESC"
     );
 
