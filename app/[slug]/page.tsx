@@ -11,60 +11,60 @@ const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=dev.trider
 // Contextual CTA variations - picks based on article content
 const INLINE_CTAS = [
     {
-        keywords: ["adhd", "focus", "attention", "distract"],
+        keywords: ["adhd", "focus", "attention", "distract", "executive", "dysfunction"],
         badge: "Built for ADHD brains",
         title: "Your brain works different. Your tracker should too.",
-        desc: "Trider's Freeze Day feature protects your streak when executive dysfunction hits. No guilt. No broken chains.",
-        feature: "🧊 Freeze Days · 🎯 Focus Timer · 📊 No-shame tracking"
+        desc: "Crisis Mode shows you just 3 micro-tasks on bad days. Freeze Days protect your streak when paralysis hits. No guilt. No broken chains.",
+        feature: "🧊 Freeze Days · 😮‍💨 Crisis Mode · 🤖 AI Habit Coach"
     },
     {
-        keywords: ["procrastinat", "lazy", "motivation", "start"],
+        keywords: ["procrastinat", "lazy", "motivation", "start", "overwhelm"],
         badge: "Anti-procrastination tool",
         title: "Reading about it won't fix it. Tracking it might.",
-        desc: "Trider sends smart nudges based on YOUR patterns. Not generic 6AM motivational garbage.",
-        feature: "⚡ Smart Reminders · 🔥 Streak System · 📱 2-tap check-in"
+        desc: "On your worst days, Trider's Crisis Mode strips everything down to 3 tiny tasks: breathe, vent, do 1 thing. That's it.",
+        feature: "😮‍💨 Crisis Mode · ⚡ Smart Reminders · 🔥 Streak System"
     },
     {
         keywords: ["habit", "routine", "morning", "daily", "streak"],
         badge: "Habit tracking, reimagined",
         title: "Most habit apps are built for robots. This one isn't.",
-        desc: "Miss a day? Freeze it. Hate rigid schedules? Use flexible tracking. Actually used by people who suck at consistency.",
-        feature: "🔄 Flexible Habits · 🧊 Freeze Days · 👥 Squad Accountability"
+        desc: "One-tap templates like 'Morning Routine' and 'Student Life' get you started in 30 seconds. Miss a day? Freeze it. No excuses needed.",
+        feature: "📦 Habit Templates · 🧊 Freeze Days · 👥 Squad Accountability"
     },
     {
         keywords: ["sleep", "dopamine", "screen", "phone", "detox"],
-        badge: "Your recovery companion",
+        badge: "Track your recovery",
         title: "Track the comeback, not just the failure.",
-        desc: "Trider focuses on streaks AND recovery. Because relapsing on a dopamine detox isn't the end — it's data.",
-        feature: "📈 Recovery Tracking · 🧘 Mood Journal · 🔕 Focus Mode"
+        desc: "Log your mood daily. Track your screen-off habit. Trider's journal shows you exactly when you started slipping — and when you came back.",
+        feature: "📓 Mood Journal · 📈 Habit Analytics · 🧊 Freeze Days"
     },
     {
-        keywords: ["study", "exam", "school", "college", "learn"],
+        keywords: ["study", "exam", "school", "college", "learn", "reading", "book"],
         badge: "Study habit builder",
         title: "Stop planning to study. Start tracking the actual hours.",
-        desc: "Built-in focus timer. Habit streaks for study sessions. Real data, not vibes.",
-        feature: "⏱️ Focus Timer · 📚 Session Tracking · 🏆 Daily Streaks"
+        desc: "Set a Pomodoro timer habit for study sessions. Track your reading progress book by book. Real data — not vibes.",
+        feature: "⏱️ Pomodoro Timer Habits · 📖 Reading Tracker · 🏆 Streaks"
     },
     {
-        keywords: ["kids", "children", "child", "toddler", "parenting", "bedtime"],
+        keywords: ["kids", "children", "child", "toddler", "parenting", "bedtime", "family"],
         badge: "Build family routines",
         title: "Kids don't follow routines. They follow consistency.",
-        desc: "Track your own habits first. When you're consistent, they will be too. Use Trider to build a routine that actually sticks — for you.",
-        feature: "⏰ Custom Reminders · ✅ Daily Checklist · 🔥 Streak Motivation"
+        desc: "Build your own consistent habits first with Trider templates. Share your streak with a spouse via Squad mode. Be the example.",
+        feature: "📦 Routine Templates · 👥 Squad Mode · ✅ Daily Check-ins"
     },
     {
-        keywords: ["skin", "skincare", "face", "glow", "moistur", "sunscreen", "beauty"],
+        keywords: ["skin", "skincare", "face", "glow", "moistur", "sunscreen", "beauty", "self-care"],
         badge: "Skincare habit tracker",
         title: "A perfect routine is useless if you skip it half the time.",
-        desc: "Trider tracks your skincare routine like any other habit. Morning. Night. No more forgetting. No more 'I'll start Monday'.",
-        feature: "🌙 Morning + Night Habits · ✅ Streak Tracking · 📸 Visual Progress"
+        desc: "Build morning AND night skincare as separate timer habits. Trider tracks your streak day by day. No more 'I'll start Monday'.",
+        feature: "🌙 AM/PM Habit Splits · ✅ Streak Tracking · ⏰ Reminders"
     },
     {
         keywords: ["expense", "budget", "money", "saving", "finance", "spend"],
         badge: "Build better money habits",
         title: "Tracking expenses is a habit. Treat it like one.",
-        desc: "Set a daily 'check your spending' habit in Trider. 2 minutes a day. That's all it takes to stop bleeding money without noticing.",
-        feature: "📅 Daily Check-in Habit · ⏰ Reminder System · 🔥 Consistency Streaks"
+        desc: "Set a 2-minute daily 'check your spending' habit in Trider. After 7 days straight, you'll actually know where your money goes.",
+        feature: "📅 Daily Finance Habit · ⏰ Smart Reminders · 🔥 Streaks"
     }
 ]
 
