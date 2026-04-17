@@ -15,9 +15,27 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
     if (!rows || rows.length === 0) return { title: "Guide Not Found" };
 
+    const title = rows[0].title + " | Mindcrate";
+    const description = rows[0].ai_summary as string;
+
     return {
-        title: rows[0].title + " | Mindcrate",
-        description: rows[0].ai_summary,
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url: `https://mindcrate.vercel.app/${params.slug}`,
+            siteName: "Mindcrate",
+            type: "article",
+        },
+        twitter: {
+            card: "summary",
+            title,
+            description,
+        },
+        alternates: {
+            canonical: `https://mindcrate.vercel.app/${params.slug}`,
+        },
     }
 }
 
