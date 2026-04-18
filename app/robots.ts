@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/", "/api/", "/auth/"],
     },
-    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/articles-sitemap.xml`],
+    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/guides-sitemap.xml`],
   }
 }
