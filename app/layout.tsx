@@ -9,7 +9,7 @@ export const metadata = {
   description: "The ultimate library of guides for ADHD, executive dysfunction, and practical productivity. Built to help you take action.",
   metadataBase: new URL("https://mindcrate.vercel.app"),
   verification: {
-    google: "z0kw-wB9hdXNDB_cvvI1-nVVkcZev_CHjDOHtHOTuHk",
+    google: "jSDMXbPkKq9PCeEjZjnspfN2RX3v7yjA6Orym1TQAu8",
   },
 }
 
